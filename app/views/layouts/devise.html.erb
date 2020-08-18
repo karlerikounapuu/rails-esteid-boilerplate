@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Broilerplate</title>
+    <title>Devise</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -17,31 +17,24 @@
         <li class="nav-item active">
           <a class="nav-link" href="<%= root_path %>">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <% unless current_user %>
-            <%= link_to "Authentication page", new_user_session_path, class: 'nav-link' %>
-          <% else %>
-            <a class="nav-link" href="#">Dashboard</a>
-          <% end %>
-        </li>
-      </ul>
-      <ul class="navbar-nav">
-        <li class="dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
-            <%=  current_user ? "#{current_user.name}" : "User not logged in" %>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <% unless current_user %>
-              <%= link_to "Log in", new_user_session_path, class: 'dropdown-item'%>
-            <% else %>
-              <a class="dropdown-item" href="#">Log out</a>
-            <% end %>
-          </div>
-        </li>
       </ul>
     </div>
   </nav>
   <body>
-    <%= yield %>
+  <div class="container">
+    <div class="split left">
+      <div class="jumbotron d-flex align-items-center min-vh-100" style="background: none;">
+        <div class="container text-white">
+          <h1 class="display-6">Authentication</h1>
+          <p class="lead">Smart-ID / Mobile-ID / ID-card</p>
+        </div>
+      </div>
+    </div>
+    <div class="split right text-center row align-items-center h-100">
+          <div class="col-6 mx-auto">
+      <%= yield %>
+        </div>
+    </div>
+</div>
   </body>
 </html>
