@@ -5,11 +5,16 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.3.0",
+    "@rails/webpacker": "^5.2.1",
+    "alertifyjs": "^1.13.1",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
+    "less": "^3.12.2",
+    "less-loader": "^6.2.0",
     "popper.js": "^1.16.1",
-    "turbolinks": "^5.2.0"
+    "resolve-url-loader": "^3.1.1",
+    "turbolinks": "^5.2.0",
+    "webpack": "^4.44.1"
   },
   "version": "0.1.0",
   "devDependencies": {

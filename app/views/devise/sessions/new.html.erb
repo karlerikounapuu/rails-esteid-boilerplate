@@ -1,6 +1,6 @@
 <h2>Let's get to know each other</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { autocomplete: "off", class: "form-horizontal center" }) do |f| %>
+<%= form_for(@user, url: wait_for_handshake_path, html: { autocomplete: "off", class: "form-horizontal center" }) do |f| %>
 <div class="form-group">
   <span>Authenticate yourself via</span>
 </div>
@@ -8,13 +8,13 @@
   <div class="col-md-8 mx-auto">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-primary active">
-        <input type="radio" name="channel" id="smartid" autocomplete="off" checked> Smart-ID
+              <%= radio_button_tag :channel, 'mobileid', true, id: 'mobileid' %> Mobile-ID
       </label>
       <label class="btn btn-primary">
-        <input type="radio" name="channel" id="mobileid" autocomplete="off"> Mobile-ID
+              <%= radio_button_tag :channel, 'smartid', false, id: 'smartid' %> Smart-ID
       </label>
       <label class="btn btn-primary">
-        <input type="radio" name="channel" id="idcard" autocomplete="off"> ID Card
+              <%= radio_button_tag :channel, 'idcard', false, id: 'idcard' %> ID-card
       </label>
     </div>
   </div>
@@ -27,7 +27,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">EE  </span>
       </div>
-      <%= f.number_field :email, autofocus: true, autocomplete: nil, class: "form-control", placeholder: 'Identity code', min: 0 %>
+      <%= f.number_field :personal_id, autofocus: true, autocomplete: nil, class: "form-control", placeholder: 'Identity code', min: 0 %>
     </div>
   </div>
 
@@ -36,7 +36,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon2">+372</span>
       </div>
-      <%= f.number_field :password, autofocus: true, autocomplete: nil, class: "form-control", placeholder: 'Phone number' %>
+      <%= f.number_field :mid_phone, autofocus: true, autocomplete: nil, class: "form-control", placeholder: 'Phone number' %>
     </div>
   </div>
 

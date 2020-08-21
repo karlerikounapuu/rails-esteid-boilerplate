@@ -6,7 +6,6 @@ ruby '2.5.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -56,3 +55,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "devise", "~> 4.7"
 
 gem "figaro", "~> 1.2"
+
+gem "rest-client", "~> 2.1"
+
+gem "pg", "~> 1.2"
+
+gem "sidekiq", "~> 6.1"

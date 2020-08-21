@@ -1,6 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700,900&display=swap');
 
+@import "~alertifyjs/build/css/alertify";
+@import "~alertifyjs/build/css/themes/bootstrap/";
+
 body {
   font-family: 'Lato', sans-serif;
 }

@@ -10,7 +10,7 @@
   <div class="container text-white">
     <h1 class="display-6">Rails 6 / Devise broilerplate </h1>
     <p class="lead">Featuring Estonian Smart-ID / Mobile-ID / ID-card</p>
-    <%= link_to "Take me to authentication", new_user_session_path, class: 'btn btn-primary btn-lg'%>
+    <%= link_to "Take me to #{current_user ? 'dashboard' : 'authentication'}", current_user ? documents_path : new_user_session_path, class: 'btn btn-primary btn-lg'%>
   </div>
 </div>
 
