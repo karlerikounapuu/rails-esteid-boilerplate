@@ -7,7 +7,7 @@ module ApplicationCable
     end
 
     def find_authentication_session
-      auth = Authentication.find(cookies.signed[:handshake_uuid])
+      auth = AuthSession.find(cookies.signed[:handshake_uuid])
 
       auth
     rescue StandardError

@@ -2,7 +2,7 @@ class AuthenticationsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:sign_in]
 
   def show
-    @authentication = Authentication.find(params[:id])
+    @authentication = AuthSession.find(params[:id])
     render json: @authentication
   end
 
@@ -14,27 +14,23 @@ class AuthenticationsController < ApplicationController
     end
 
     @auth_method = authentication_method
-    unless @auth_method
+    @authentication = AuthSession.new(type: @auth_method, authenticator: authentication_params[:mid_phone])
+    @authentication.user = @user
+
+    unless @authentication.valid?
       redirect_to new_user_session_path, notice: 'Select valid authentication method'
       return
     end
 
-    @authentication = Authentication.new(channel: @auth_method, authenticator: authentication_params[:mid_phone])
-    @authentication.user = @user
-    if @authentication.valid?
-      @authentication.save
-      cookies.signed[:handshake_uuid] = @authentication.id
-      AuthenticationWorker.perform_async(@authentication.id)
-      render :wait_for_handshake
-    else
-      redirect_to new_user_session_path, notice: @authentication.errors.full_messages.join(',')
-      return
-    end
+    @authentication.save
+    cookies.signed[:handshake_uuid] = @authentication.id
+    AuthenticationWorker.perform_async(@authentication.id)
+    render :wait_for_handshake
   end
 
   def authorize_by_session
     cookies.delete :handshake_uuid
-    @authentication = Authentication.find(params[:id])
+    @authentication = AuthSession.find(params[:id])
     if @authentication.usable?
       @authentication.mark_as_used!
       sign_in(@authentication.user)
@@ -50,8 +46,8 @@ class AuthenticationsController < ApplicationController
   end
 
   def authentication_method
-    return 'Smart-ID' if params[:channel] == 'smartid'
-    return 'Mobile-ID' if params[:channel] == 'mobileid'
-    return 'ID-card' if params[:channel] == 'idcard'
+    return 'AuthSessions::SmartId' if params[:channel] == 'smartid'
+    return 'AuthSessions::MobileId' if params[:channel] == 'mobileid'
+    return 'AuthSessions::IdCard' if params[:channel] == 'idcard'
   end
 end

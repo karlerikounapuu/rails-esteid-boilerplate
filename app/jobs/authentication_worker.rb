@@ -2,10 +2,10 @@ class AuthenticationWorker
   include Sidekiq::Worker
 
   def perform(auth_id)
-    auth = Authentication.find(auth_id)
+    auth = AuthSession.find(auth_id)
 
     case auth.channel
-    when 'Mobile-ID'
+    when 'MobileId'
       if auth.state != 'initialized'
         puts 'Returning because auth has been used'
         return

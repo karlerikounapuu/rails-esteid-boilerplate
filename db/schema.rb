@@ -10,15 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_20_184216) do
+ActiveRecord::Schema.define(version: 2020_08_25_093908) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "authentications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "auth_sessions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
-    t.string "channel", null: false
     t.string "authenticator", null: false
     t.string "session"
     t.string "state", default: "initialized", null: false
@@ -27,7 +26,8 @@ ActiveRecord::Schema.define(version: 2020_08_20_184216) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "verification_pin"
-    t.index ["user_id"], name: "index_authentications_on_user_id"
+    t.text "type", null: false
+    t.index ["user_id"], name: "index_auth_sessions_on_user_id"
   end
 
   create_table "documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -58,6 +58,6 @@ ActiveRecord::Schema.define(version: 2020_08_20_184216) do
     t.index ["personal_id", "country_alpha3"], name: "index_users_on_personal_id_and_country_alpha3", unique: true
   end
 
-  add_foreign_key "authentications", "users"
+  add_foreign_key "auth_sessions", "users"
   add_foreign_key "documents", "users"
 end

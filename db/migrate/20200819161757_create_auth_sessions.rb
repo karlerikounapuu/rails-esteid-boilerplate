@@ -1,6 +1,6 @@
-class CreateAuthentications < ActiveRecord::Migration[6.0]
+class CreateAuthSessions < ActiveRecord::Migration[6.0]
   def change
-    create_table :authentications, id: :uuid do |t|
+    create_table :auth_sessions, id: :uuid do |t|
       t.belongs_to :user, type: :uuid, foreign_key: true, index: true
       t.string :channel, null: false
       t.string :authenticator, null: false
