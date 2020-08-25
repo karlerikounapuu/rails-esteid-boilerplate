@@ -3,16 +3,27 @@ development:
   mid_api_base_url: https://tsp.demo.sk.ee/mid-api
   mid_api_rp_uuid: 00000000-0000-0000-0000-000000000000
   mid_api_rp_name: DEMO
-
+  # Smart-ID configuration
+  smid_api_base_url: https://sid.demo.sk.ee/smart-id-rp/v1/
+  smid_api_rp_uuid: 00000000-0000-0000-0000-000000000000
+  smid_api_rp_name: DEMO
 
 test:
   # Mobile-ID configuration
   mid_api_base_url: https://tsp.demo.sk.ee/mid-api
   mid_api_rp_uuid: 00000000-0000-0000-0000-000000000000
   mid_api_rp_name: DEMO
+  # Smart-ID configuration
+  smid_api_base_url: https://sid.demo.sk.ee/smart-id-rp/v1/
+  smid_api_rp_uuid: 00000000-0000-0000-0000-000000000000
+  smid_api_rp_name: DEMO
 
 production:
   # Mobile-ID configuration
   mid_api_base_url: https://tsp.demo.sk.ee/mid-api
   mid_api_rp_uuid: 00000000-0000-0000-0000-000000000000
   mid_api_rp_name: DEMO
+  # Smart-ID configuration
+  smid_api_base_url: https://sid.demo.sk.ee/smart-id-rp/v1/
+  smid_api_rp_uuid: 00000000-0000-0000-0000-000000000000
+  smid_api_rp_name: DEMO

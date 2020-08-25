@@ -2,13 +2,13 @@ class AuthSession < ApplicationRecord
   ENABLED_METHODS = %w[AuthSessions::MobileId AuthSessions::SmartId AuthSessions::IdCard].freeze
 
   belongs_to :user
-  validates :authenticator, :state, :channel, presence: true
+  validates :authenticator, :state, :type, presence: true
   validates :type, inclusion: { in: ENABLED_METHODS }
   before_validation :populate_authenticator
   validate :validate_authenticator_validity
 
   def populate_authenticator
-    return unless channel == 'IdCard'
+    return unless %w[IdCard SmartId].include? channel
 
     self.authenticator = user.personal_id
   end
@@ -43,7 +43,7 @@ class AuthSession < ApplicationRecord
   def validate_authenticator_validity
     first_char = authenticator[0]
     auth_length = authenticator.length
-    return true if channel == 'IdCard' # ID validatation done in User model
+    return true if %w[IdCard SmartId].include? channel # ID validatation done in User model
     return true if auth_length == 7 && first_char == '5'
     return true if auth_length == 8 && %w[5 8].include?(first_char)
 
